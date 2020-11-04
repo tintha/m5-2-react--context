@@ -1,0 +1,1 @@
+export const GameContext = React.createContext(null);
