@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import GlobalStyles from "./GlobalStyles";
@@ -18,13 +18,13 @@ function App() {
   } = React.useContext(GameContext);
 
   window.addEventListener("beforeunload", () => {  
-      setTimeClosed(((new Date().getTime())));
+      setTimeClosed(new Date().getTime());
   });
 
   window.addEventListener("load", () => {
-    const timeOpened = ((new Date().getTime()));
+    const timeOpened = new Date().getTime();
     const timeDiff = Math.floor((timeOpened - timeClosed) / 1000);
-    const cookiesEarnedWhileAway = (timeDiff * cookiesPerSecond);
+    const cookiesEarnedWhileAway = timeDiff * cookiesPerSecond;
     setNumCookies(numCookies + cookiesEarnedWhileAway);
   });
 
