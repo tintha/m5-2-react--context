@@ -25,9 +25,6 @@ function App() {
     const timeOpened = ((new Date().getTime()));
     const timeDiff = Math.floor((timeOpened - timeClosed) / 1000);
     const cookiesEarnedWhileAway = (timeDiff * cookiesPerSecond);
-    console.log(`Diff: ${timeDiff}`);
-    console.log(cookiesPerSecond);
-    console.log(cookiesEarnedWhileAway);
     setNumCookies(numCookies + cookiesEarnedWhileAway);
   });
 
