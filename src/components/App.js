@@ -18,13 +18,13 @@ function App() {
   } = React.useContext(GameContext);
 
   window.addEventListener("beforeunload", () => {  
-      setTimeClosed(Math.floor((new Date().getTime())));
+      setTimeClosed(((new Date().getTime())));
   });
 
   window.addEventListener("load", () => {
-    const timeOpened = Math.floor((new Date().getTime()));
+    const timeOpened = ((new Date().getTime()));
     const timeDiff = Math.floor((timeOpened - timeClosed) / 1000);
-    const cookiesEarnedWhileAway = Math.floor(timeDiff * cookiesPerSecond);
+    const cookiesEarnedWhileAway = (timeDiff * cookiesPerSecond);
     console.log(`Diff: ${timeDiff}`);
     console.log(cookiesPerSecond);
     console.log(cookiesEarnedWhileAway);
