@@ -5,6 +5,7 @@ import { items } from '../data/data';
 export const GameContext = React.createContext(null);
 
 export const GameProvider = ({ children }) => {
+  const [timeClosed, setTimeClosed] = usePersistedState(new Date().getTime(), 'timeClosed')
   const [numCookies, setNumCookies] = usePersistedState(1000, 'numCookies');
   const [purchasedItems, setPurchasedItems] = usePersistedState({
     cursor: 0,
@@ -29,7 +30,9 @@ export const GameProvider = ({ children }) => {
         setNumCookies, 
         purchasedItems,
         setPurchasedItems,
-        cookiesPerSecond: calculateCookiesPerSecond(purchasedItems)
+        cookiesPerSecond: calculateCookiesPerSecond(purchasedItems),
+        timeClosed,
+        setTimeClosed
       }}>
         {children}
     </GameContext.Provider>);

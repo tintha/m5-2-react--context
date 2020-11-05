@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import GlobalStyles from "./GlobalStyles";
@@ -8,8 +8,30 @@ import { GameContext } from './GameContext';
 import useInterval from "../hooks/use-interval.hook";
 
 function App() {
-  const { numCookies, setNumCookies, cookiesPerSecond } = React.useContext(GameContext);
+ 
+  const { 
+    numCookies, 
+    setNumCookies, 
+    cookiesPerSecond, 
+    timeClosed, 
+    setTimeClosed 
+  } = React.useContext(GameContext);
 
+  window.addEventListener("beforeunload", () => {  
+      setTimeClosed(Math.floor((new Date().getTime())));
+  });
+
+  window.addEventListener("load", () => {
+    const timeOpened = Math.floor((new Date().getTime()));
+    const timeDiff = Math.floor((timeOpened - timeClosed) / 1000);
+    const cookiesEarnedWhileAway = Math.floor(timeDiff * cookiesPerSecond);
+    console.log(`Diff: ${timeDiff}`);
+    console.log(cookiesPerSecond);
+    console.log(cookiesEarnedWhileAway);
+    setNumCookies(numCookies + cookiesEarnedWhileAway);
+  });
+
+  
   useInterval(() => {
     setNumCookies(numCookies + cookiesPerSecond);
   }, 1000);
